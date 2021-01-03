@@ -1,6 +1,6 @@
 module.exports = {
 	root: true,
-	extends: ['@fullstacksjs', 'prettier'],
+	extends: ['@fullstacksjs', 'prettier', 'prettier/@typescript-eslint'],
 	rules: {
 		'no-console': 'off',
 	},
