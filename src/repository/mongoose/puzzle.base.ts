@@ -2,10 +2,10 @@ import PuzzleRepo from '../base/puzzle.base';
 import { MongoosePuzzleDoc } from '../../models/mongoose/puzzle.model';
 import { MongoosePuzzleConfig } from '../../config/mongoose.config';
 
-interface MongoosePuzzlesRepoBase extends PuzzleRepo {
+interface BaseMongoosePuzzlesRepo extends PuzzleRepo {
 	connect: (config: MongoosePuzzleConfig) => Promise<void>;
 	getOneRandomPuzzle: () => Promise<MongoosePuzzleDoc>;
 	getPuzzleById: (id: string) => Promise<MongoosePuzzleDoc>;
 }
 
-export default MongoosePuzzlesRepoBase;
+export default BaseMongoosePuzzlesRepo;

@@ -5,9 +5,9 @@ import {
 	PuzzleModel,
 } from '../../models/mongoose/puzzle.model';
 import { MongoosePuzzleConfig } from '../../config/mongoose.config';
-import MongoosePuzzlesRepoBase from './puzzle.base';
+import BaseMongoosePuzzlesRepo from './puzzle.base';
 
-class MongoosePuzzleRepo implements MongoosePuzzlesRepoBase {
+class MongoosePuzzleRepo implements BaseMongoosePuzzlesRepo {
 	public async connect(config: MongoosePuzzleConfig) {
 		try {
 			await mongoose.connect(config.url, config.options);
