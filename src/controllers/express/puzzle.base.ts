@@ -1,8 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
+import MongoosePuzzleRepo from '../../repository/mongoose/puzzle.repo';
 
 import PuzzleController from '../base/puzzle.base';
 
 interface ExpressPuzzleController extends PuzzleController {
+	puzzleRepo: MongoosePuzzleRepo;
+
 	getRandomPuzzleHandler: (
 		req: Request,
 		res: Response,
