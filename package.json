@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"@commitlint/config-conventional": "11.0.0",
 		"@fullstacksjs/eslint-config": "4.1.9",
+		"@types/express": "4.17.9",
 		"commitlint": "11.0.0",
 		"eslint": "7.16.0",
 		"eslint-config-prettier": "7.1.0",
