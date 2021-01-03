@@ -11,12 +11,12 @@
 		"lint:fix": "eslint \"./**/*.{ts,js}\" --quiet --fix"
 	},
 	"dependencies": {
-		"commitizen": "4.2.2",
 		"dotenv": "8.2.0",
 		"express": "4.17.1",
 		"mongoose": "5.11.9"
 	},
 	"devDependencies": {
+		"commitizen": "4.2.2",
 		"@commitlint/config-conventional": "11.0.0",
 		"@fullstacksjs/eslint-config": "4.1.9",
 		"@types/express": "4.17.9",
