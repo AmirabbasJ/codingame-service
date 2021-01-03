@@ -5,10 +5,9 @@ import {
 	PuzzleModel,
 } from '../../models/mongoose/puzzle.model';
 import { MongoosePuzzleConfig } from '../../config/mongoose.config';
-import PuzzlesRepo from './base';
+import MongoosePuzzlesRepoBase from './puzzle.base';
 
-class MongoosePuzzleRepo
-	implements PuzzlesRepo<MongoosePuzzleDoc, MongoosePuzzleConfig> {
+class MongoosePuzzleRepo implements MongoosePuzzlesRepoBase {
 	public async connect(config: MongoosePuzzleConfig) {
 		try {
 			await mongoose.connect(config.url, config.options);
@@ -19,12 +18,12 @@ class MongoosePuzzleRepo
 		}
 	}
 
-	public async getPuzzleById(id: string): Promise<MongoosePuzzleDoc> {
+	public async getPuzzleById(id: string) {
 		const puzzle: MongoosePuzzleDoc = await PuzzleModel.findById(id);
 		return puzzle;
 	}
 
-	public async getOneRandomPuzzle(): Promise<MongoosePuzzleDoc> {
+	public async getOneRandomPuzzle() {
 		const randomPuzzles: MongoosePuzzleDoc[] = await PuzzleModel.aggregate([
 			{ $sample: { size: 1 } },
 		]);
