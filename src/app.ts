@@ -8,6 +8,6 @@ const app: Express = express();
 
 app.use('/api/v1/puzzle', puzzleRouter);
 
-createListener(app as Express, serverConfig, logger);
+createListener(app, serverConfig, logger);
 
 export default app;
