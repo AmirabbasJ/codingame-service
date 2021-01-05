@@ -1,12 +1,16 @@
 import mongoose from 'mongoose';
 
-import {
-	MongoosePuzzleDoc,
-	PuzzleModel,
-} from '../../models/mongoose/puzzle.model';
-import { MongoosePuzzleConfig } from '../../config/mongoose.config';
-import { Logger } from '../../config';
-import BaseMongoosePuzzleRepo from './puzzle.base';
+import { MongoosePuzzleDoc, PuzzleModel } from '../models/mongoosePuzzleModel';
+import { MongoosePuzzleConfig } from '../config/mongoose.config';
+import { Logger } from '../config';
+
+import PuzzleRepo from './puzzleRepo';
+
+interface BaseMongoosePuzzleRepo extends PuzzleRepo {
+	connect: (config: MongoosePuzzleConfig) => Promise<void>;
+	getOneRandomPuzzle: () => Promise<MongoosePuzzleDoc | null>;
+	getPuzzleById: (id: string) => Promise<MongoosePuzzleDoc | null>;
+}
 
 class MongoosePuzzleRepo implements BaseMongoosePuzzleRepo {
 	private logger: Logger;

@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import ExpressPuzzleController from '../../controllers/express/puzzle.controller';
-import MongoosePuzzleRepo from '../../repository/mongoose/puzzle.repo';
+import ExpressPuzzleController from '../controllers/expressPuzzleController';
+import MongoosePuzzleRepo from '../repository/mongoosePuzzleRepo';
 
-import { logger, mongoosePuzzleConfig } from '../../config';
+import { logger, mongoosePuzzleConfig } from '../config';
 
 const puzzleRouter: Router = Router();
 

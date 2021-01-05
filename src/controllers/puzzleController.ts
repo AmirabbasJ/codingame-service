@@ -1,7 +1,7 @@
-import PuzzleRepo from '../../repository/base/puzzle.base';
+import PuzzleRepo from '../repository/puzzleRepo';
 
 interface PuzzleController {
-	readonly puzzleRepo: PuzzleRepo;
+	puzzleRepo: PuzzleRepo;
 
 	getRandomPuzzleHandler: (...arg: any[]) => any;
 	getPuzzleByIdHandler: (...arg: any[]) => any;

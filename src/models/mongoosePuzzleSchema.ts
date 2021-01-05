@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import mongoose from 'mongoose';
 
-import TestSchema from './test.schema';
+import TestSchema from './mongooseTestSchema';
 
 const PuzzleSchema = new mongoose.Schema(
 	{

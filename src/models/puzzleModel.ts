@@ -1,4 +1,4 @@
-import Test from './test.base';
+import Test from './testModel';
 
 interface Puzzle {
 	id: string;

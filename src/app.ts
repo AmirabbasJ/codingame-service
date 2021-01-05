@@ -1,7 +1,7 @@
 import express, { Express } from 'express';
 import { logger, serverConfig } from './config';
 
-import puzzleRouter from './routers/express/puzzle.router';
+import puzzleRouter from './routers/expressPuzzleRouter';
 import createListener from './server';
 
 const app: Express = express();
