@@ -26,7 +26,7 @@ class MongoosePuzzleRepo implements BaseMongoosePuzzleRepo {
 	}
 
 	public async getPuzzleById(id: string) {
-		const puzzle: MongoosePuzzleDoc = await PuzzleModel.findById(id);
+		const puzzle: MongoosePuzzleDoc | null = await PuzzleModel.findById(id);
 		return puzzle;
 	}
 
