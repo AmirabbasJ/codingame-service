@@ -21,7 +21,10 @@ class MongoosePuzzleRepo implements BaseMongoosePuzzleRepo {
 
 	public async connect(config: MongoosePuzzleConfig) {
 		try {
-			await mongoose.connect(config.url, config.options);
+			await mongoose.connect(config.url, {
+				useNewUrlParser: true,
+				useUnifiedTopology: true,
+			});
 			this.logger.info('✅ successfully conected to mongodb codingame db');
 		} catch (err) {
 			this.logger.info('🥅 error occurred');
