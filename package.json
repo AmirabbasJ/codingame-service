@@ -1,11 +1,11 @@
 {
 	"name": "codingame-service",
 	"version": "1.0.0",
-	"main": "src/server.ts",
+	"main": "src/app.ts",
 	"license": "MIT",
 	"scripts": {
 		"commit": "cz",
-		"dev": "nodemon src/server.ts",
+		"dev": "nodemon src/app.ts",
 		"format": "prettier --write \"./**/*.{ts,js,json}\"",
 		"lint": "eslint \"./**/*.{ts,js}\"",
 		"lint:fix": "eslint \"./**/*.{ts,js}\" --quiet --fix"
