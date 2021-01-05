@@ -5,20 +5,23 @@ import {
 	PuzzleModel,
 } from '../../models/mongoose/puzzle.model';
 import { MongoosePuzzleConfig } from '../../config/mongoose.config';
+import { Logger } from '../../config';
 import BaseMongoosePuzzleRepo from './puzzle.base';
 
 class MongoosePuzzleRepo implements BaseMongoosePuzzleRepo {
-	constructor(config: MongoosePuzzleConfig) {
+	private logger: Logger;
+	constructor(config: MongoosePuzzleConfig, logger: Logger) {
+		this.logger = logger;
 		this.connect(config);
 	}
 
 	public async connect(config: MongoosePuzzleConfig) {
 		try {
 			await mongoose.connect(config.url, config.options);
-			console.info('✅ successfully conected to mongodb codingame db');
+			this.logger.info('✅ successfully conected to mongodb codingame db');
 		} catch (err) {
-			console.info('🥅 error occurred');
-			console.error(err);
+			this.logger.info('🥅 error occurred');
+			this.logger.error(err);
 		}
 	}
 
