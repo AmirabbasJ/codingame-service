@@ -6,7 +6,7 @@ interface MongoosePuzzleConfig {
 }
 
 const mongoosePuzzleConfig: MongoosePuzzleConfig = {
-	url: process.env.MONGODB_URL,
+	url: process.env.MONGODB_URL || 'mongodb://localhost:27017/codingame',
 	options: {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
