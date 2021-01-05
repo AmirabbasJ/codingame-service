@@ -8,22 +8,23 @@ class ExpressPuzzleController implements BaseExpressPuzzleController {
 		this.puzzleRepo = puzzleRepos;
 	}
 
-	public async getRandomPuzzleHandler(
+	public getRandomPuzzleHandler = async (
 		_req: Request,
 		res: Response
-	): Promise<unknown> {
+	): Promise<unknown> => {
 		const randomPuzzle = await this.puzzleRepo.getOneRandomPuzzle();
-		return res.json(randomPuzzle);
-	}
 
-	public async getPuzzleByIdHandler(
+		return res.json(randomPuzzle);
+	};
+
+	public getPuzzleByIdHandler = async (
 		req: Request,
 		res: Response
-	): Promise<unknown> {
+	): Promise<unknown> => {
 		const { id } = req.params;
 		const puzzle = await this.puzzleRepo.getPuzzleById(id);
 		return res.json(puzzle);
-	}
+	};
 }
 
 export default ExpressPuzzleController;
