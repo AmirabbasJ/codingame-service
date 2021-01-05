@@ -1,8 +1,19 @@
-import app from './app';
-import { serverConfig } from './config';
+import { Logger, ServerConfig } from './config';
 
-app.listen(serverConfig.port, () => {
-	console.log(`listening on port ${serverConfig.port}`);
-});
+interface App {
+	listen: (port: number, ...arg: any[]) => void;
+}
 
-process.on('unhandledRejection', console.error);
+const createListener = (
+	app: App,
+	serverConfig: ServerConfig,
+	logger: Logger
+) => {
+	app.listen(serverConfig.port, () => {
+		logger.log(`listening on port ${serverConfig.port}`);
+	});
+
+	process.on('unhandledRejection', logger.error);
+};
+
+export default createListener;
