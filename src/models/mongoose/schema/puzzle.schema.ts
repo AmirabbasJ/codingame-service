@@ -6,6 +6,7 @@ import TestSchema from './test.schema';
 const PuzzleSchema = new mongoose.Schema(
 	{
 		_id: String,
+		id: String,
 		title: String,
 		fastest: Boolean,
 		reverse: Boolean,
