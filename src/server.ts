@@ -4,11 +4,7 @@ interface App {
 	listen: (port: number, ...arg: any[]) => void;
 }
 
-const createListener = (
-	app: App,
-	serverConfig: ServerConfig,
-	logger: Logger
-) => {
+const listen = (app: App, serverConfig: ServerConfig, logger: Logger) => {
 	app.listen(serverConfig.port, () => {
 		logger.log(`listening on port ${serverConfig.port}`);
 	});
@@ -16,4 +12,4 @@ const createListener = (
 	process.on('unhandledRejection', logger.error);
 };
 
-export default createListener;
+export default listen;
