@@ -5,20 +5,14 @@ import { Config, Logger } from '../config';
 
 import PuzzleRepo from './puzzleRepo';
 
-interface BaseMongoosePuzzleRepo extends PuzzleRepo {
-	connect: (config: Config) => Promise<void>;
-	getOneRandomPuzzle: () => Promise<MongoosePuzzleDoc | null>;
-	getPuzzleById: (id: string) => Promise<MongoosePuzzleDoc | null>;
-}
-
-class MongoosePuzzleRepo implements BaseMongoosePuzzleRepo {
+class MongoosePuzzleRepo implements PuzzleRepo {
 	private logger: Logger;
 	constructor(config: Config) {
 		this.logger = config.logger;
 		this.connect(config);
 	}
 
-	public async connect(config: Config) {
+	public async connect(config: Config): Promise<void> {
 		try {
 			await mongoose.connect(config.dbUrl, {
 				useNewUrlParser: true,
@@ -31,12 +25,12 @@ class MongoosePuzzleRepo implements BaseMongoosePuzzleRepo {
 		}
 	}
 
-	public async getPuzzleById(id: string) {
+	public async getPuzzleById(id: string): Promise<MongoosePuzzleDoc | null> {
 		const puzzle: MongoosePuzzleDoc | null = await PuzzleModel.findById(id);
 		return puzzle;
 	}
 
-	public async getOneRandomPuzzle() {
+	public async getOneRandomPuzzle(): Promise<MongoosePuzzleDoc | null> {
 		const randomPuzzles: MongoosePuzzleDoc[] = await PuzzleModel.aggregate([
 			{ $sample: { size: 1 } },
 		]);

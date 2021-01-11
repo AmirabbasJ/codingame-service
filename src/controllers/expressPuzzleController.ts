@@ -2,14 +2,8 @@ import { Request, Response, RequestHandler } from 'express';
 import PuzzleRepo from '../repository/puzzleRepo';
 import PuzzleController from './puzzleController';
 
-interface ExpressPuzzleController extends PuzzleController {
-	puzzleRepo: PuzzleRepo;
-	getRandomPuzzleHandler: RequestHandler;
-	getPuzzleByIdHandler: RequestHandler;
-}
-
-class ExpressPuzzleController implements ExpressPuzzleController {
-	puzzleRepo: PuzzleRepo;
+class ExpressPuzzleController implements PuzzleController {
+	private puzzleRepo: PuzzleRepo;
 	constructor(puzzleRepos: PuzzleRepo) {
 		this.puzzleRepo = puzzleRepos;
 	}
