@@ -1,27 +1,26 @@
 import mongoose from 'mongoose';
 
 import { MongoosePuzzleDoc, PuzzleModel } from '../models/mongoosePuzzleModel';
-import { MongoosePuzzleConfig } from '../config/mongoose.config';
-import { Logger } from '../config';
+import { Config, Logger } from '../config';
 
 import PuzzleRepo from './puzzleRepo';
 
 interface BaseMongoosePuzzleRepo extends PuzzleRepo {
-	connect: (config: MongoosePuzzleConfig) => Promise<void>;
+	connect: (config: Config) => Promise<void>;
 	getOneRandomPuzzle: () => Promise<MongoosePuzzleDoc | null>;
 	getPuzzleById: (id: string) => Promise<MongoosePuzzleDoc | null>;
 }
 
 class MongoosePuzzleRepo implements BaseMongoosePuzzleRepo {
 	private logger: Logger;
-	constructor(config: MongoosePuzzleConfig, logger: Logger) {
-		this.logger = logger;
+	constructor(config: Config) {
+		this.logger = config.logger;
 		this.connect(config);
 	}
 
-	public async connect(config: MongoosePuzzleConfig) {
+	public async connect(config: Config) {
 		try {
-			await mongoose.connect(config.url, {
+			await mongoose.connect(config.dbUrl, {
 				useNewUrlParser: true,
 				useUnifiedTopology: true,
 			});
