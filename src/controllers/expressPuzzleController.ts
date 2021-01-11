@@ -1,12 +1,11 @@
-import { Request, Response, RequestHandler } from 'express';
+import { Request, RequestHandler, Response } from 'express';
+import { Inject } from 'typescript-ioc';
+
 import PuzzleRepo from '../repository/puzzleRepo';
 import PuzzleController from './puzzleController';
 
 class ExpressPuzzleController implements PuzzleController {
-  private puzzleRepo: PuzzleRepo;
-  constructor(puzzleRepos: PuzzleRepo) {
-    this.puzzleRepo = puzzleRepos;
-  }
+  @Inject private puzzleRepo: PuzzleRepo;
 
   public getRandomPuzzleHandler: RequestHandler = async (
     _req: Request,

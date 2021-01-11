@@ -1,16 +1,13 @@
-import { ExpressApp, App } from './app';
-import { config } from './config';
-import ExpressPuzzleController from './controllers/expressPuzzleController';
-import PuzzleController from './controllers/puzzleController';
-import MongoosePuzzleRepo from './repository/mongoosePuzzleRepo';
-import PuzzleRepo from './repository/puzzleRepo';
+import { Container } from 'typescript-ioc';
 
-const { logger } = config;
+import { App, ExpressApp } from './app';
+import { Logger } from './config';
+import { createContainer } from './config/container';
 
-const puzzleRepo: PuzzleRepo = new MongoosePuzzleRepo(config);
-const controller: PuzzleController = new ExpressPuzzleController(puzzleRepo);
-const app: App = new ExpressApp(controller, config);
+Container.configure(...createContainer());
+
+const app: App = new ExpressApp();
 
 app.listen();
 
-process.on('unhandledRejection', logger.error);
+process.on('unhandledRejection', Container.get(Logger).error);

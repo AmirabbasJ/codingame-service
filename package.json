@@ -12,13 +12,14 @@
   "dependencies": {
     "dotenv": "8.2.0",
     "express": "4.17.1",
-    "mongoose": "5.11.9"
+    "mongoose": "5.11.9",
+    "typescript-ioc": "3.2.2"
   },
   "devDependencies": {
-    "commitizen": "4.2.2",
     "@commitlint/config-conventional": "11.0.0",
     "@fullstacksjs/eslint-config": "4.2.1",
     "@types/express": "4.17.9",
+    "commitizen": "4.2.2",
     "commitlint": "11.0.0",
     "eslint": "7.17.0",
     "husky": "4.3.6",

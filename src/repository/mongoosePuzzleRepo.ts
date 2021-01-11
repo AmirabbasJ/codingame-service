@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 
-import { MongoosePuzzleDoc, PuzzleModel } from '../models/mongoosePuzzleModel';
 import { Config, Logger } from '../config';
-
+import { MongoosePuzzleDoc, PuzzleModel } from '../models/mongoosePuzzleModel';
 import PuzzleRepo from './puzzleRepo';
 
-class MongoosePuzzleRepo implements PuzzleRepo {
+export class MongoosePuzzleRepo implements PuzzleRepo {
   private logger: Logger;
   constructor(config: Config) {
     this.logger = config.logger;
@@ -39,5 +38,3 @@ class MongoosePuzzleRepo implements PuzzleRepo {
     return randomPuzzle;
   }
 }
-
-export default MongoosePuzzleRepo;

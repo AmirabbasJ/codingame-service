@@ -1,4 +1,6 @@
 node_modules/
 
-.env
+.env.local
+.env.dev.local
+.env.prod.local
 yarn-error.*
