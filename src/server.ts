@@ -1,15 +1,16 @@
-import { Logger, ServerConfig } from './config';
+import { ExpressApp, App } from './app';
+import { config } from './config';
+import ExpressPuzzleController from './controllers/expressPuzzleController';
+import PuzzleController from './controllers/puzzleController';
+import MongoosePuzzleRepo from './repository/mongoosePuzzleRepo';
+import PuzzleRepo from './repository/puzzleRepo';
 
-interface App {
-	listen: (port: number, ...arg: any[]) => void;
-}
+const { logger } = config;
 
-const listen = (app: App, serverConfig: ServerConfig, logger: Logger) => {
-	app.listen(serverConfig.port, () => {
-		logger.log(`listening on port ${serverConfig.port}`);
-	});
+const puzzleRepo: PuzzleRepo = new MongoosePuzzleRepo(config);
+const controller: PuzzleController = new ExpressPuzzleController(puzzleRepo);
+const app: App = new ExpressApp(controller, config);
 
-	process.on('unhandledRejection', logger.error);
-};
+app.listen();
 
-export default listen;
+process.on('unhandledRejection', logger.error);
