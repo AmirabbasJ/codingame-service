@@ -1,13 +1,38 @@
-import express, { Express } from 'express';
-import { logger, serverConfig } from './config';
+import express, { Express, Router } from 'express';
+import { Config } from './config';
+import PuzzleController from './controllers/puzzleController';
 
-import puzzleRouter from './routers/expressPuzzleRouter';
-import listen from './server';
+interface App {
+	listen: () => void;
+}
 
-const app: Express = express();
+class ExpressApp implements App {
+	private app: Express;
+	private config: Config;
+	private controller: PuzzleController;
+	constructor(puzzleController: PuzzleController, config: Config) {
+		this.app = express();
+		this.config = config;
+		this.controller = puzzleController;
 
-app.use('/api/v1/puzzle', puzzleRouter);
+		const puzzleRouters = this.getPuzzlesRouter();
+		this.app.use('/api/v1/puzzle', puzzleRouters);
+	}
 
-listen(app, serverConfig, logger);
+	private getPuzzlesRouter() {
+		const puzzleRouter: Router = Router();
 
-export default app;
+		puzzleRouter.get('/random', this.controller.getRandomPuzzleHandler);
+		puzzleRouter.get('/:id', this.controller.getPuzzleByIdHandler);
+
+		return puzzleRouter;
+	}
+
+	public listen() {
+		this.app.listen(this.config.port, () => {
+			this.config.logger.log(`listening on port ${this.config.port}`);
+		});
+	}
+}
+
+export { ExpressApp, App };
