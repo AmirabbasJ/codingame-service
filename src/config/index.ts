@@ -1,23 +1,19 @@
 import dotenv from 'dotenv';
 
-dotenv.config();
-
-interface Logger {
-	log: (...args: any[]) => void;
-	info: (...args: any[]) => void;
-	error: (...args: any[]) => void;
-}
+import { Logger } from '../Infrastructures/Interfaces';
 
 interface Config {
-	port: number;
-	dbUrl: string;
-	logger: Logger;
+  port: number;
+  dbUrl: string;
 }
 
-const config: Config = {
-	dbUrl: process.env.MONGODB_URL || 'mongodb://localhost:27017/codingame',
-	logger: console,
-	port: Number.parseInt(String(process.env.PORT), 10) || 3000,
-};
+function getConfig(): Config {
+  dotenv.config();
 
-export { Logger, config, Config };
+  return {
+    dbUrl: process.env.MONGODB_URL || 'mongodb://localhost:27017/codingame',
+    port: Number.parseInt(String(process.env.PORT), 10) || 3000,
+  };
+}
+
+export { Config, getConfig, Logger };
