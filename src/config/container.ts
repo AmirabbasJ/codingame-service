@@ -16,6 +16,5 @@ export function createContainer(): ContainerConfig {
     { bind: Logger, to: ConsoleLogger },
     { bind: PuzzleRepo, to: MongoosePuzzleRepo },
     { bind: PuzzleController, to: ExpressPuzzleController },
-    { bind: PuzzleController, to: XController },
   ];
 }
