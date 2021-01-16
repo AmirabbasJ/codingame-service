@@ -2,7 +2,7 @@ import { Request, RequestHandler, Response } from 'express';
 import { Inject } from 'typescript-ioc';
 
 import PuzzleRepo from '../repository/puzzleRepo';
-import PuzzleController from './puzzleController';
+import { PuzzleController } from './puzzleController';
 
 class ExpressPuzzleController implements PuzzleController {
   @Inject private puzzleRepo: PuzzleRepo;
