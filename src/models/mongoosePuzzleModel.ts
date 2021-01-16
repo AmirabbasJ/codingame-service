@@ -1,7 +1,7 @@
-import mongoose, { Model, Document } from 'mongoose';
+import mongoose, { Document, Model } from 'mongoose';
 
-import Puzzle from './puzzleModel';
 import PuzzleSchema from './mongoosePuzzleSchema';
+import Puzzle from './puzzleModel';
 
 interface MongoosePuzzleDoc extends Puzzle, Document {
   id: string;
