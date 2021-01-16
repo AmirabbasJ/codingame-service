@@ -1,19 +1,20 @@
 import mongoose from 'mongoose';
+import { Inject, InjectValue } from 'typescript-ioc';
 
 import { Config, Logger } from '../config';
 import { MongoosePuzzleDoc, PuzzleModel } from '../models/mongoosePuzzleModel';
 import PuzzleRepo from './puzzleRepo';
 
 export class MongoosePuzzleRepo implements PuzzleRepo {
-  private logger: Logger;
-  constructor(config: Config) {
-    this.logger = config.logger;
-    this.connect(config);
+  @Inject private logger: Logger;
+  @InjectValue('config') private config: Config;
+  constructor() {
+    this.connect();
   }
 
-  public async connect(config: Config): Promise<void> {
+  public async connect(): Promise<void> {
     try {
-      await mongoose.connect(config.dbUrl, {
+      await mongoose.connect(this.config.dbUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
