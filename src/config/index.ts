@@ -3,16 +3,22 @@ import dotenv from 'dotenv';
 import { Logger } from '../Infrastructures/Interfaces';
 
 interface Config {
-  port: number;
   dbUrl: string;
+  port: number;
+}
+
+function getEnv(envName: string, defaultEnv?: string): string {
+  const env = process.env[envName] ?? defaultEnv;
+  if (env == null) throw Error(`undefined envirement varible: ${envName}`);
+  return env;
 }
 
 function getConfig(): Config {
   dotenv.config();
 
   return {
-    dbUrl: process.env.MONGODB_URL || 'mongodb://localhost:27017/codingame',
-    port: Number.parseInt(String(process.env.PORT), 10) || 3000,
+    dbUrl: getEnv('MONGODB_URL', 'mongodb://localhost:27017/codit'),
+    port: Number.parseInt(getEnv('PORT'), 10),
   };
 }
 
