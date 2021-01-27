@@ -32,7 +32,9 @@ export class MongoosePuzzleRepo implements PuzzleRepo {
       { $sample: { size: 1 } },
     ]);
     const [randomPuzzle] = randomPuzzles;
-
+    if (!randomPuzzle) {
+      return null;
+    }
     return randomPuzzle;
   }
 }
