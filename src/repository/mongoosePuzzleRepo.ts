@@ -8,9 +8,6 @@ import PuzzleRepo from './puzzleRepo';
 export class MongoosePuzzleRepo implements PuzzleRepo {
   @Inject private logger: Logger;
   @InjectValue('config') private config: Config;
-  constructor() {
-    this.connect();
-  }
 
   public async connect(): Promise<void> {
     try {
