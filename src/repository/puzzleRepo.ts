@@ -1,7 +1,7 @@
 import Puzzle from '../models/puzzleModel';
 
 abstract class PuzzleRepo {
-  connect: (config: any) => Promise<void>;
+  connect: () => Promise<void>;
   getOneRandomPuzzle: () => Promise<Puzzle | null>;
   getPuzzleById: (id: string) => Promise<Puzzle | null>;
 }
