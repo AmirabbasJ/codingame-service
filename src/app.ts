@@ -16,26 +16,24 @@ class ExpressApp {
     this.app = express();
   }
 
-  public connectToDb() {
+  public init() {
     this.puzzleRepo.connect();
-  }
 
-  public useRouteHandler(route: string, handler: Router) {
-    this.app.use(route, handler);
-  }
-
-  public getPuzzlesRouter() {
     const puzzleRouter: Router = Router();
     puzzleRouter.get('/random', this.puzzleController.getRandomPuzzleHandler);
     puzzleRouter.get('/:id', this.puzzleController.getPuzzleByIdHandler);
 
-    return puzzleRouter;
+    this.app.use('/api/v1/puzzle', puzzleRouter);
+
+    return this;
   }
 
   public listen() {
     this.app.listen(this.config.port, () => {
       this.logger.log(`listening on port ${this.config.port}`);
     });
+
+    return this;
   }
 }
 
