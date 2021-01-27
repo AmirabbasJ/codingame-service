@@ -9,7 +9,7 @@ interface Config {
 
 function getEnv(envName: string, defaultEnv?: string): string {
   const env = process.env[envName] ?? defaultEnv;
-  if (env == null) throw Error(`undefined envirement varible: ${envName}`);
+  if (env == null) throw Error(`undefined environment variable: ${envName}`);
   return env;
 }
 
@@ -17,7 +17,7 @@ function getConfig(): Config {
   dotenv.config();
 
   return {
-    dbUrl: getEnv('MONGODB_URL', 'mongodb://localhost:27017/codit'),
+    dbUrl: getEnv('MONGODB_URL', 'mongodb://localhost:27017/codeit'),
     port: Number.parseInt(getEnv('PORT'), 10),
   };
 }

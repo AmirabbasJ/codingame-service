@@ -15,7 +15,7 @@ export class MongoosePuzzleRepo implements PuzzleRepo {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
-      this.logger.info('✅ successfully conected to mongodb codingame db');
+      this.logger.info('✅ successfully connected to mongodb codingame db');
     } catch (err) {
       this.logger.info('🥅 error occurred');
       this.logger.error(err);
