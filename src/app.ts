@@ -3,27 +3,29 @@ import { Inject, InjectValue } from 'typescript-ioc';
 
 import { Config, Logger } from './config';
 import { PuzzleController } from './controllers/puzzleController';
+import PuzzleRepo from './repository/puzzleRepo';
 
-interface App {
-  listen: () => void;
-}
-
-class ExpressApp implements App {
+class ExpressApp {
   @InjectValue('config') private config: Config;
+  @Inject private puzzleRepo: PuzzleRepo;
   @Inject private puzzleController: PuzzleController;
   @Inject private logger: Logger;
   private app: Express;
 
   constructor() {
     this.app = express();
-    const puzzleRouters = this.getPuzzlesRouter();
-    this.app.use('/api/v1/puzzle', puzzleRouters);
   }
 
-  private getPuzzlesRouter() {
-    const puzzleRouter: Router = Router();
-    this.logger.log('X');
+  public connectToDb() {
+    this.puzzleRepo.connect();
+  }
 
+  public useRouteHandler(route: string, handler: Router) {
+    this.app.use(route, handler);
+  }
+
+  public getPuzzlesRouter() {
+    const puzzleRouter: Router = Router();
     puzzleRouter.get('/random', this.puzzleController.getRandomPuzzleHandler);
     puzzleRouter.get('/:id', this.puzzleController.getPuzzleByIdHandler);
 
@@ -37,4 +39,4 @@ class ExpressApp implements App {
   }
 }
 
-export { App, ExpressApp };
+export { ExpressApp };

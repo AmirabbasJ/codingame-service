@@ -1,12 +1,17 @@
 import { Container } from 'typescript-ioc';
 
-import { App, ExpressApp } from './app';
+import { ExpressApp } from './app';
 import { Logger } from './config';
 import { createContainer } from './config/container';
 
 Container.configure(...createContainer());
 
-const app: App = new ExpressApp();
+const app: ExpressApp = new ExpressApp();
+
+const puzzleRouter = app.getPuzzlesRouter();
+app.useRouteHandler('/api/v1/puzzle', puzzleRouter);
+
+app.connectToDb();
 
 app.listen();
 
