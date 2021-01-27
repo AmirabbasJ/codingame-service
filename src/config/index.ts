@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 
-import { Logger } from '../Infrastructures/Interfaces';
+import { Logger } from '../Infrastructures/logger';
 
 interface Config {
   dbUrl: string;

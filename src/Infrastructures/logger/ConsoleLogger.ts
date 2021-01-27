@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Logger } from '../config';
+import { Logger } from '../../config';
 
 export class ConsoleLogger implements Logger {
   log(...args: any[]) {
